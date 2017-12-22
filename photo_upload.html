@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Photo upload page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+    <script type="text/javascript">
+        function mecab(){
+            var img = $('#img').val();
+            $.post("test_post.php", {
+                img: img
+            }, function(data) {
+                console.log(data);
+            })
+        }
+    </script>
+
+</head>
+<body>
+    <section class="hero is-primary is-bold">
+        <div class="hero-body">
+            <div class="container">
+            <h1 class="title">
+                photo sharering
+            </h1>
+            </div>
+        </div>
+        <div class="hero-foot">
+            <nav class="tabs is-boxed is-fullwidth">
+                <div class="container">
+                    <ul>
+                    <li><a href="home.html">home</a></li>
+                    <li class="is-active"><a href="photo_upload.html">Upload</a></li>
+                    <li><a href="view_photo.html">Veiw your photo</a></li>
+                    <li><a>hoge</a></li>
+                    <li><a>hogehoge</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+        <div class="notification">
+            <form action="test_post.php" method="post" enctype="multipart/form-data">
+                <div class="field">
+                    <div class="file is-primary">
+                        <label class="file-label">
+                        <input class="file-input" type="file" name="photo" id="img">
+                            <script type="text/javascript">
+                                //値が変化した時に実行されるイベント
+                                var input_file = document.getElementById("img");
+                                input_file.onchange = function (){
+                                    // ファイルが選択されたか
+                                    if(input_file.value){
+                                        console.log("ファイルが選択された:" + input_file.value);
+                                        document.getElementById("output").innerHTML=input_file.value;
+                                    }else{
+                                        console.log("ファイルが未選択");
+                                    }
+                                };            
+                            </script>
+                        <span class="file-cta">
+                            <span class="file-icon">
+                            <i class="fa fa-upload"></i>
+                            </span>
+                            <span class="file-label">
+                            Select photo
+                            </span>
+                        </span>
+                        </label>
+                    </div>
+                    <div class="has-text-black" id="output"></div>
+                </div>
+                <div class="control">
+                        <button type="submit" class="button is-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+
+    </section>
+    
+</body>

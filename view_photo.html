@@ -1,0 +1,102 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Veiw photo</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    
+        <link rel="stylesheet" type="text/css" href="slider_pro_master/dist/css/slider-pro.min.css" media="screen"/>
+        <link rel="stylesheet" type="text/css" href="slider_pro_master/libs/fancybox/jquery.fancybox.css" media="screen"/>
+        <script type="text/javascript" src="slider_pro_master/libs/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="slider_pro_master/dist/js/jquery.sliderPro.min.js"></script>
+        <script type="text/javascript" src="slider_pro_master/libs/fancybox/jquery.fancybox.pack.js"></script>
+
+        <script type="text/javascript">
+            $( document ).ready(function( $ ) {
+                $( '#photo_slide' ).sliderPro({
+                    width: 960,
+                    height: 500,
+                    fade: true,
+                    arrows: true,
+                    buttons: false,
+                    fullScreen: false,
+                    shuffle: true,
+                    smallSize: 500,
+                    mediumSize: 1000,
+                    largeSize: 3000,
+                    thumbnailArrows: false,
+                    autoplay: false
+                });
+                // instantiate fancybox when a link is clicked
+                $( '#photo_slide .sp-image' ).parent( 'a' ).on( 'click', function( event ) {
+                    event.preventDefault();
+
+                    // check if the clicked link is also used in swiping the slider
+                    // by checking if the link has the 'sp-swiping' class attached.
+                    // if the slider is not being swiped, open the lightbox programmatically,
+                    // at the correct index
+                    if ( $( '#photo_slide' ).hasClass( 'sp-swiping' ) === false ) {
+                        $.fancybox.open( $( '#photo_slide .sp-image' ).parent( 'a' ), { index: $( this ).parents( '.sp-slide' ).index() } );
+                    }
+                });
+            });
+        </script>
+
+    </head>
+    <body>
+        <section class="hero is-primary is-bold">
+                <div class="hero-body">
+                    <div class="container">
+                    <h1 class="title">
+                        photo sharering
+                    </h1>
+                    </div>
+                </div>
+                <div class="hero-foot">
+                    <nav class="tabs is-boxed is-fullwidth">
+                        <div class="container">
+                            <ul>
+                            <li ><a href="home.html">home</a></li>
+                            <li><a href="photo_upload.html">Upload</a></li>
+                            <li class="is-active"><a href="view_photo.html">Veiw your photo</a></li>
+                            <li><a>hoge</a></li>
+                            <li><a>hogehoge</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+        </section>
+
+        <div class="notification">
+            <div id="photo_slide" class="slider-pro">
+                <div class="sp-slides">
+                    <div class="sp-slide">
+                        <a href="images/image1.jpg">
+                            <img class="sp-image" src="images/image1.jpg"/>
+                        </a>
+                    </div>
+                    <div class="sp-slide">
+                        <a href="images/image2.jpg">
+                            <img class="sp-image" src="images/image2.jpg"/>
+                        </a>
+                    </div>
+                    <div class="sp-slide">
+                        <a href="images/image3.jpg">
+                            <img class="sp-image" src="images/image3.jpg"/>
+                        </a>
+                    </div>
+                </div>
+        
+                <div class="sp-thumbnails">
+                    <img class="sp-thumbnail" src="images/image1.jpg"/>
+                    <img class="sp-thumbnail" src="images/image2.jpg"/>
+                    <img class="sp-thumbnail" src="images/image3.jpg"/>
+                    </div>
+            </div>
+        </div>
+
+
+    </body>
+
+</html>
