@@ -7,6 +7,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 
+    <script type="text/javascript">
+        function mecab(){
+            var img = $('#img').val();
+            $.post("test_post.php", {
+                img: img
+            }, function(data) {
+                console.log(data);
+            })
+        }
+    </script>
+    
 </head>
 <body>
     <section class="hero is-primary is-bold">
