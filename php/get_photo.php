@@ -31,5 +31,7 @@ $stmt->bindvalue(":photoname", $photoname);
 //ステートメントの実行
 $stmt->execute();
 
+
+print json_encode($data);
 ?>
 

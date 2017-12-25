@@ -6,6 +6,22 @@
     <title>Photo upload page</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        function send_photo(){
+            var photo = $('#img').val();
+            $.post("php/get_photo.php", {
+                photo: photo
+            }, function(data) {
+                console.log(data)
+                result = data.match(/ok/);
+                if (result.indexOf('ok') != -1) {
+                    alert('success');
+                }
+            })
+        }
+    </script>
 
 </head>
 <body>
@@ -32,7 +48,7 @@
         </div>
 
         <div class="notification">
-            <form action="php/get_photo.php" method="post" enctype="multipart/form-data">
+            <form enctype="multipart/form-data">
                 <div class="field">
                     <div class="file is-primary">
                         <label class="file-label">
@@ -63,7 +79,7 @@
                     <div class="has-text-black" id="output"></div>
                 </div>
                 <div class="control">
-                        <button type="submit" class="button is-primary">Submit</button>
+                        <button type="button" class="button is-primary" onclick="send_photo()" >Submit</button>
                 </div>
             </form>
         </div>
