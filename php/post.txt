@@ -1,0 +1,11 @@
+<pre class='xdebug-var-dump' dir='ltr'>
+<small>C:\xampp\htdocs\photo_share\php\get_photo.php:8:</small>
+<b>array</b> <i>(size=1)</i>
+  'photo' <font color='#888a85'>=&gt;</font> 
+    <b>array</b> <i>(size=5)</i>
+      'name' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'150485.jpg'</font> <i>(length=10)</i>
+      'type' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'image/jpeg'</font> <i>(length=10)</i>
+      'tmp_name' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'C:\xampp\tmp\phpD169.tmp'</font> <i>(length=24)</i>
+      'error' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>0</font>
+      'size' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>1233613</font>
+</pre>

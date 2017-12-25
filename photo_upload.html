@@ -10,16 +10,19 @@
 
     <script type="text/javascript">
         function send_photo(){
-            var photo = $('#img').val();
-            $.post("php/get_photo.php", {
-                photo: photo
-            }, function(data) {
-                console.log(data)
-                result = data.match(/ok/);
-                if (result.indexOf('ok') != -1) {
-                    alert('success');
-                }
-            })
+            var formData = $('#photo').get()[0];
+            var photo = new FormData( formData );
+            console.log(photo);
+            $.ajax({
+                url: 'php/get_photo.php',
+                type: 'post',
+                dataType: 'text',
+                data: photo,
+                processData: false,
+                contentType: false
+            }).done(function(result){
+                alert(result);
+            });
         }
     </script>
 
@@ -48,7 +51,7 @@
         </div>
 
         <div class="notification">
-            <form enctype="multipart/form-data">
+            <form enctype="multipart/form-data" id="photo">
                 <div class="field">
                     <div class="file is-primary">
                         <label class="file-label">

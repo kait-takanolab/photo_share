@@ -1,18 +1,11 @@
 <?php
-
+header("Content-type: text/json; charset=UTF-8");
 //データベース接続用phpをrequire
 require_once 'get_db.php';
 
 $photo = $_FILES['photo'];
-$photodata=$_FILES['photo']['tmp_name'];
-
+$photodata=$photo['tmp_name'];
 $photoname=$photo['name'];
-//if ($photo['name'] != null) {
-   // $result = "ok";
-//}
-//else{
-   // $result = "no";
-//}
 
 //echo $result;
 //var_dump ($photo);
@@ -31,7 +24,12 @@ $stmt->bindvalue(":photoname", $photoname);
 //ステートメントの実行
 $stmt->execute();
 
-
-print json_encode($data);
+if ($photoname != null) {
+    $result = "ok! photo saved.";
+}
+else{
+    $result = "error!";
+}
+print json_encode($result)
 ?>
 
