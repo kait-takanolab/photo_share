@@ -16,7 +16,7 @@
 
         <script type="text/javascript">          
             //スライドショーの機能
-            $( document ).ready(function( $ ) {
+            function slide_show(){
                 $( '#photo_slide' ).sliderPro({
                     width: 960,
                     height: 500,
@@ -38,7 +38,7 @@
                         $.fancybox.open( $( '#photo_slide .sp-image' ).parent( 'a' ), { index: $( this ).parents( '.sp-slide' ).index() } );
                     }
                 });
-            });
+            };
         </script>
 
     </head>

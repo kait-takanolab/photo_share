@@ -17,8 +17,10 @@ $.ajax({
   success: function(json){
     console.log(json);
     photoname=json;
-    $('#test').prepend('<div>AfterBegin</div>');
-//成功した場合はjson構造体の配列に格納される
+    $('#main-window').prepend('<div class="sp-slide"><a href="images/image5.jpg"><img class="sp-image" src="images/image5.jpg"/></a></div>');
+    $('#sub-window').prepend('<img class="sp-thumbnail" src="images/image5.jpg"/>');
+    slide_show();
+    //成功した場合はjson構造体の配列に格納される
   },
   //Ajax通信が失敗した場合に呼び出されるメソッド
   error: function(XMLHttpRequest, textStatus, errorThrown){
