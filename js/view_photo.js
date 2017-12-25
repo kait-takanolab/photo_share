@@ -17,6 +17,7 @@ $.ajax({
   success: function(json){
     console.log(json);
     photoname=json;
+    $('#test').prepend('<div>AfterBegin</div>');
 //成功した場合はjson構造体の配列に格納される
   },
   //Ajax通信が失敗した場合に呼び出されるメソッド
