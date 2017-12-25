@@ -12,8 +12,11 @@
         <script type="text/javascript" src="slider_pro_master/dist/js/jquery.sliderPro.min.js"></script>
         <script type="text/javascript" src="slider_pro_master/libs/fancybox/jquery.fancybox.pack.js"></script>
 
-        <script type="text/javascript">
-            $( document ).ready(function( $ ) {
+        <script type="text/javascript" src="js/view_photo.js"></script>
+
+        <script type="text/javascript">          
+            //スライドショーの機能
+            function slide_show(){
                 $( '#photo_slide' ).sliderPro({
                     width: 960,
                     height: 500,
@@ -31,16 +34,11 @@
                 // instantiate fancybox when a link is clicked
                 $( '#photo_slide .sp-image' ).parent( 'a' ).on( 'click', function( event ) {
                     event.preventDefault();
-
-                    // check if the clicked link is also used in swiping the slider
-                    // by checking if the link has the 'sp-swiping' class attached.
-                    // if the slider is not being swiped, open the lightbox programmatically,
-                    // at the correct index
                     if ( $( '#photo_slide' ).hasClass( 'sp-swiping' ) === false ) {
                         $.fancybox.open( $( '#photo_slide .sp-image' ).parent( 'a' ), { index: $( this ).parents( '.sp-slide' ).index() } );
                     }
                 });
-            });
+            };
         </script>
 
     </head>
@@ -70,7 +68,8 @@
 
         <div class="notification">
             <div id="photo_slide" class="slider-pro">
-                <div class="sp-slides">
+                <div class="sp-slides" id="main-window">
+                    <!--
                     <div class="sp-slide">
                         <a href="images/image1.jpg">
                             <img class="sp-image" src="images/image1.jpg"/>
@@ -86,15 +85,18 @@
                             <img class="sp-image" src="images/image3.jpg"/>
                         </a>
                     </div>
+                    -->
                 </div>
         
-                <div class="sp-thumbnails">
+                <div class="sp-thumbnails" id="sub-window">
+                    <!--
                     <img class="sp-thumbnail" src="images/image1.jpg"/>
                     <img class="sp-thumbnail" src="images/image2.jpg"/>
                     <img class="sp-thumbnail" src="images/image3.jpg"/>
-                    </div>
+                    -->
+                </div>
             </div>
         </div>
+        <div id="test"></div>
     </body>
-    <script type="text/javascript" src="js/view_photo.js"></script>
 </html>

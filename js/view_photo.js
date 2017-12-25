@@ -16,8 +16,15 @@ $.ajax({
   //Ajax通信が成功した場合に呼び出されるメソッド
   success: function(json){
     console.log(json);
-    photoname=json;
-//成功した場合はjson構造体の配列に格納される
+    for(let i in json){
+      var name = json[i]['name'];
+      if (name != null) {
+        $('#main-window').prepend("<div class='sp-slide'><a href='images/"+name+"'><img class='sp-image' src='images/"+name+"'/></a></div>");
+        $('#sub-window').prepend('<img class="sp-thumbnail" src="images/'+name+'"/>'); 
+      }
+    }
+    slide_show();
+    //成功した場合はjson構造体の配列に格納される
   },
   //Ajax通信が失敗した場合に呼び出されるメソッド
   error: function(XMLHttpRequest, textStatus, errorThrown){
