@@ -6,22 +6,38 @@
     <title>home page</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" > 
+        //画面が狭いときにメニューが折りたたみできるようにしているよ
+        $(function(){
+            $(".navbar-burger").click(function(){
+                if($(this).attr("class")=="navbar-burger burger"){
+                $(this).removeClass("navbar-burger burger").addClass("navbar-burger burger is-active");
+                $(".navbar-menu").removeClass("navbar-menu").addClass("navbar-menu is-active");
+                }
+                else{
+                $(this).removeClass("navbar-burger burger is-active").addClass("navbar-burger burger");
+                $(".navbar-menu").removeClass("navbar-menu is-active").addClass("navbar-menu");
+                }
+                });
+        });
+    </script>
 
 </head>
 <body>
     <section class="hero is-primary is-fullheight is-bold">
         <div class="hero-head">
-            <header class="navbar">
-                <div class="container">
-                    <div class="navbar-brand">
-                        <span class="navbar-burger burger" data-target="navbarMenuHeroC">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        </span>
+            <nav class="navbar is-transparent">
+                <div class="navbar-brand">
+                    <div class="navbar-burger burger" data-target="navbarMenuHeroC">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                     </div>
-                    <div id="navbarMenuHeroC" class="navbar-menu">
-                        <div class="navbar-end">
+                </div>
+                <div id="navbarMenuHeroC" class="navbar-menu" >
+                    <div class="navbar-end">
                         <a class="navbar-item is-active">
                             Home
                         </a>
@@ -31,10 +47,9 @@
                         <a class="navbar-item" href="view_photo.html">
                             View
                         </a>
-                        </div>
                     </div>
                 </div>
-            </header>
+            </nav>
         </div>
         <div class="hero-body">
             <div class="container">
