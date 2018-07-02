@@ -36,14 +36,15 @@
                 </div>
         </section>
         
-        <div class="field">
+        <div class="field notification">
             <div class="file is-primary">
                 <label class="file-label">
                 <input class="file-input" type="file" name="photo" id="img" onclick="get_starttime()">
                     <script type="text/javascript">
                         var alpha = 0;
                         var beta = 0;
-                        var gamma = 0;          
+                        var gamma = 0;    
+                        var first_timestanp      
                         window.addEventListener("deviceorientation", handleOrientation, true);
                         function handleOrientation(event) {
                             alpha = event.alpha;
@@ -52,9 +53,8 @@
                         };
                         function get_starttime() {
                             var nowtime=new Date(); 
-                            var first_timestanp=nowtime.getTime();
-                            console.log(first_timestanp);
-                            document.getElementById("output2").innerHTML=first_timestanp;   
+                            first_timestanp=nowtime.getTime();
+                            console.log(first_timestanp);   
                         }
                         //値が変化した時に実行されるイベント
                         var input_file = document.getElementById("img");
@@ -71,8 +71,8 @@
                                     $("#preview").attr('src', e.target.result);
                                 }
                                 reader.readAsDataURL(e.target.files[0]);
-                                document.getElementById("output3").innerHTML=finish_timestanp;
-                                document.getElementById("output4").innerHTML = alpha+"<br>"+beta+"<br>"+gamma;          
+                                document.getElementById("taketime").innerHTML="Take photo time: " + (finish_timestanp - first_timestanp);
+                                document.getElementById("gyro").innerHTML = "Gyro Direction:"+alpha+"<br>Gyro Vertical slope:"+beta+"<br>Gyro Left and right inclination:"+gamma;          
                             }else{
                                 console.log("ファイルが未選択");
                             }
@@ -89,10 +89,9 @@
                 </span>
                 </label>
             </div>
-            <img id = "preview">
-            <div class="has-text-black" id="output2"></div>
-            <div class="has-text-black" id="output3"></div>
-            <div class="has-text-black" id="output4"></div>
+            <img id="preview">
+            <div class="has-text-black" id="taketime"></div>
+            <div class="has-text-black" id="gyro"></div>
         </div>
 
 
