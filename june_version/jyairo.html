@@ -10,45 +10,6 @@
         <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.2.1/exif.min.js"></script>
-        <script type="text/javascript">
-            /*
-            function handleOrientation(event) {
-                alpha = event.alpha;
-                beta  = event.beta;
-                gamma = event.gamma;
-                document.getElementById("text1").innerHTML=alpha;
-                document.getElementById("text2").innerHTML=beta;
-                document.getElementById("text3").innerHTML=gamma;   
-            };
-            */
-            /*
-            function save() {
-                var nowtime=new Date(); 
-                var timestanp=nowtime.getTime();
-            */
-                /*
-                var year = nowtime.getFullYear();
-                var month = nowtime.getMonth()+1;
-                var week = nowtime.getDay();
-                var day = nowtime.getDate();  
-                var hour = nowtime.getHours();
-                var minute = nowtime.getMinutes();
-                var second = nowtime.getSeconds();
-                */
-                /*
-                $("#output4").append('<p>Direction:'+alpha+'</p><p>Vertical slope:'+beta+'</p><p>Leftand Right inclination:'+gamma+'</p><p>TimeStanp:'+timestanp+'</p>');
-                $.post("getjyairo.php",{
-                    alpha:alpha,
-                    beta:beta,
-                    gamma:gamma,
-                    time:timestanp
-                },function (data) {
-                    alert("ok");
-                    console.log(data);
-                })
-            };   
-            */
-        </script>
 
     </head>
     <body>
@@ -75,64 +36,64 @@
                 </div>
         </section>
         
-        <p>Direction:<div id="text1"></div></p>
-        <p>Vertical slope:<div id="text2"></div></p>
-        <p>Left and right inclination:<div id="text3"></div></p>
-
-        <button onclick="save()">Save</button>
-
-            <div class="field">
-                <div class="file is-primary">
-                    <label class="file-label">
-                    <input class="file-input" type="file" name="photo" id="img" onclick="get_starttime()">
-                        <script type="text/javascript">
-                            var alpha = 0;
-                            var beta = 0;
-                            var gamma = 0;          
-                            window.addEventListener("deviceorientation", handleOrientation, true);
-                            function handleOrientation(event) {
-                                alpha = event.alpha;
-                                beta  = event.beta;
-                                gamma = event.gamma;
-                            };
-                            function get_starttime() {
-                                var nowtime=new Date(); 
-                                var first_timestanp=nowtime.getTime();
-                                console.log(first_timestanp);
-                                document.getElementById("output2").innerHTML=first_timestanp;   
-                            }
-                            //値が変化した時に実行されるイベント
-                            var input_file = document.getElementById("img");
-                            input_file.onchange = function (){
-                                // ファイルが選択されたか
-                                if(input_file.value){
-                                    console.log("ファイルが選択された:" + input_file.value);
-                                    var nowtime2=new Date(); 
-                                    var finish_timestanp=nowtime2.getTime();
-                                    console.log(finish_timestanp);
-                                    document.getElementById("output1").innerHTML=input_file.value;
-                                    document.getElementById("output3").innerHTML=finish_timestanp;
-                                    document.getElementById("output4").innerHTML = alpha+"<br>"+beta+"<br>"+gamma;          
-                                }else{
-                                    console.log("ファイルが未選択");
+        <div class="field">
+            <div class="file is-primary">
+                <label class="file-label">
+                <input class="file-input" type="file" name="photo" id="img" onclick="get_starttime()">
+                    <script type="text/javascript">
+                        var alpha = 0;
+                        var beta = 0;
+                        var gamma = 0;          
+                        window.addEventListener("deviceorientation", handleOrientation, true);
+                        function handleOrientation(event) {
+                            alpha = event.alpha;
+                            beta  = event.beta;
+                            gamma = event.gamma;
+                        };
+                        function get_starttime() {
+                            var nowtime=new Date(); 
+                            var first_timestanp=nowtime.getTime();
+                            console.log(first_timestanp);
+                            document.getElementById("output2").innerHTML=first_timestanp;   
+                        }
+                        //値が変化した時に実行されるイベント
+                        var input_file = document.getElementById("img");
+                        input_file.onchange = function (e){
+                            // ファイルが選択されたか
+                            if(input_file.value){
+                                console.log("ファイルが選択された:" + input_file.value);
+                                var nowtime2=new Date(); 
+                                var finish_timestanp=nowtime2.getTime();
+                                console.log(finish_timestanp);
+                                //document.getElementById("output1").innerHTML= input_file.value;
+                                var reader = new FileReader();
+                                reader.onload = function (e) {
+                                    $("#preview").attr('src', e.target.result);
                                 }
-                            };            
-                        </script>
-                    <span class="file-cta">
-                        <span class="file-icon">
-                        <i class="fa fa-upload"></i>
-                        </span>
-                        <span class="file-label">
-                        Select photo
-                        </span>
+                                reader.readAsDataURL(e.target.files[0]);
+                                document.getElementById("output3").innerHTML=finish_timestanp;
+                                document.getElementById("output4").innerHTML = alpha+"<br>"+beta+"<br>"+gamma;          
+                            }else{
+                                console.log("ファイルが未選択");
+                            }
+                        };    
+        
+                    </script>
+                <span class="file-cta">
+                    <span class="file-icon">
+                    <i class="fa fa-upload"></i>
                     </span>
-                    </label>
-                </div>
-                <div class="has-text-black" id="output1"></div>
-                <div class="has-text-black" id="output2"></div>
-                <div class="has-text-black" id="output3"></div>
-                <div class="has-text-black" id="output4"></div>
+                    <span class="file-label">
+                    Select photo
+                    </span>
+                </span>
+                </label>
             </div>
+            <img id = "preview">
+            <div class="has-text-black" id="output2"></div>
+            <div class="has-text-black" id="output3"></div>
+            <div class="has-text-black" id="output4"></div>
+        </div>
 
 
     </body>
