@@ -36,6 +36,7 @@
         </section>
         
         <div class="field notification">
+            <form id="picture" enctype="multipart/form-data">
             <div class="file is-primary">
                 <label class="file-label">
                 <input class="file-input" type="file" name="photo" id="img" onclick="get_starttime()">
@@ -43,7 +44,8 @@
                         var alpha = 0;
                         var beta = 0;
                         var gamma = 0;    
-                        var first_timestanp      
+                        var first_timestanp;
+                        var finish_timestanp;
                         window.addEventListener("deviceorientation", handleOrientation, true);
                         function handleOrientation(event) {
                             alpha = event.alpha;
@@ -62,7 +64,7 @@
                             if(input_file.value){
                                 console.log("ファイルが選択された:" + input_file.value);
                                 var nowtime2=new Date(); 
-                                var finish_timestanp=nowtime2.getTime();
+                                finish_timestanp=nowtime2.getTime();
                                 console.log(finish_timestanp);
                                 //document.getElementById("output1").innerHTML= input_file.value;
                                 var reader = new FileReader();
@@ -78,15 +80,40 @@
                         };
                         
                         function send_photo(){
-                            var position = document.getElementsByName("answer");
+                            var camera = document.getElementsByName("answer");
                             // 選択状態の値を取得
-                            for ( var selected_position="", i=hoge.length; i--; ) {
-                                if ( hoge[i].checked ) {
-                                    var selected_position = hoge[i].value ;
+                            for ( var position="", i=camera.length; i--; ) {
+                                if ( camera[i].checked ) {
+                                    var position = camera[i].value ;
                                     break ;
                                 }
                             }
-                            console.log(selected_position);
+                            if(position === ""){
+                                alert("Please select camera position");
+                                return;
+                            }
+                            else if(input_file.value === ""){
+                                alert("Please select picture");
+                                return;
+                            }
+                            var formData = $("#picture").get()[0];
+                            var photo = new FormData( formData );
+                            photo.append("gyro_a", alpha);
+                            photo.append("gyro_b", beta);
+                            photo.append("gyro_c", gamma);
+                            photo.append("taketime", finish_timestanp - first_timestanp);
+                            photo.append("position", position);
+                            for(item of photo) console.log(item);
+                            $.ajax({
+                                url: 'php/tsts.php',
+                                type: 'post',
+                                dataType: 'text',
+                                data: photo,
+                                processData: false,
+                                contentType: false
+                            }).done(function(result){
+                                console.log(result);
+                            });
                         }
                     </script>
                 <span class="file-cta">
@@ -99,6 +126,7 @@
                 </span>
                 </label>
             </div>
+            </form>
 
             <div class="columns">
                 <div class="column">
