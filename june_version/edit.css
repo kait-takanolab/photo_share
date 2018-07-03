@@ -1,0 +1,13 @@
+.canvas-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  margin-top: 2rem;
+}
+
+.control-box {
+  padding: 2rem;
+}
