@@ -10,7 +10,6 @@
         <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.2.1/exif.min.js"></script>
-
     </head>
     <body>
         <section class="hero is-primary is-bold">
@@ -76,8 +75,19 @@
                             }else{
                                 console.log("ファイルが未選択");
                             }
-                        };    
-        
+                        };
+                        
+                        function send_photo(){
+                            var position = document.getElementsByName("answer");
+                            // 選択状態の値を取得
+                            for ( var selected_position="", i=hoge.length; i--; ) {
+                                if ( hoge[i].checked ) {
+                                    var selected_position = hoge[i].value ;
+                                    break ;
+                                }
+                            }
+                            console.log(selected_position);
+                        }
                     </script>
                 <span class="file-cta">
                     <span class="file-icon">
@@ -89,9 +99,31 @@
                 </span>
                 </label>
             </div>
-            <img id="preview">
-            <div class="has-text-black" id="taketime"></div>
-            <div class="has-text-black" id="gyro"></div>
+
+            <div class="columns">
+                <div class="column">
+                    <img id="preview">
+                    <div class="has-text-black" id="taketime"></div>
+                    <div class="has-text-black" id="gyro"></div>
+                </div>
+                <div class="column">
+                    <div>Please select Camera position</div>
+
+                    <div class="control">
+                        <label class="radio">
+                            <input type="radio" name="answer" value="high">High
+                        </label>
+                        <label class="radio">
+                            <input type="radio" name="answer" value="middle">Middle
+                        </label>
+                        <label class="radio">
+                            <input type="radio" name="answer" value="low">Low
+                        </label>
+                    </div>
+                    <button type="button" class="button is-primary" onclick="send_photo()" >Submit</button>
+
+                </div>
+            </div>
         </div>
 
 
