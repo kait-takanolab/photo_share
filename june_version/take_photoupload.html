@@ -27,14 +27,14 @@
                             <li><a href="home.html">home</a></li>
                             <li class="is-active"><a href="take_photoupload.html">Take photo</a></li>
                             <li><a href="view_photo.html">Veiw your photo</a></li>
-                            <li><a>hoge</a></li>
+                            <li><a href="edit_photo.html">Edit photo</a></li>
                             <li><a>hogehoge</a></li>
                             </ul>
                         </div>
                     </nav>
                 </div>
         </section>
-        
+
         <div class="field notification">
             <form id="picture" enctype="multipart/form-data">
             <div class="file is-primary">
@@ -43,7 +43,7 @@
                     <script type="text/javascript">
                         var alpha = 0;
                         var beta = 0;
-                        var gamma = 0;    
+                        var gamma = 0;
                         var first_timestanp;
                         var finish_timestanp;
                         window.addEventListener("deviceorientation", handleOrientation, true);
@@ -53,9 +53,9 @@
                             gamma = event.gamma;
                         };
                         function get_starttime() {
-                            var nowtime=new Date(); 
+                            var nowtime=new Date();
                             first_timestanp=nowtime.getTime();
-                            console.log(first_timestanp);   
+                            console.log(first_timestanp);
                         }
                         //値が変化した時に実行されるイベント
                         var input_file = document.getElementById("img");
@@ -63,7 +63,7 @@
                             // ファイルが選択されたか
                             if(input_file.value){
                                 console.log("ファイルが選択された:" + input_file.value);
-                                var nowtime2=new Date(); 
+                                var nowtime2=new Date();
                                 finish_timestanp=nowtime2.getTime();
                                 console.log(finish_timestanp);
                                 //document.getElementById("output1").innerHTML= input_file.value;
@@ -73,12 +73,12 @@
                                 }
                                 reader.readAsDataURL(e.target.files[0]);
                                 document.getElementById("taketime").innerHTML="Take photo time: " + (finish_timestanp - first_timestanp);
-                                document.getElementById("gyro").innerHTML = "Gyro Direction:"+alpha+"<br>Gyro Vertical slope:"+beta+"<br>Gyro Left and right inclination:"+gamma;          
+                                document.getElementById("gyro").innerHTML = "Gyro Direction:"+alpha+"<br>Gyro Vertical slope:"+beta+"<br>Gyro Left and right inclination:"+gamma;
                             }else{
                                 console.log("ファイルが未選択");
                             }
                         };
-                        
+
                         function send_photo(){
                             var camera = document.getElementsByName("answer");
                             // 選択状態の値を取得
