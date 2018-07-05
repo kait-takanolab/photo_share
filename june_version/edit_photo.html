@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-slider@2.0.0/dist/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="edit_photo.css">
+</head>
+
+<body>
+  <section class="hero is-primary is-bold">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+          photo sharering
+        </h1>
+      </div>
+    </div>
+    <div class="hero-foot">
+      <nav class="tabs is-boxed is-fullwidth">
+        <div class="container">
+          <ul>
+            <li>
+              <a href="home.html">home</a>
+            </li>
+            <li>
+              <a href="take_photoupload.html">Take photo</a>
+            </li>
+            <li>
+              <a href="view_photo.html">Veiw your photo</a>
+            </li>
+            <li class="is-active">
+              <a href="edit_photo.html">Edit photo</a>
+            </li>
+            <li>
+              <a>hogehoge</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="columns">
+      <div class="column is-7">
+        <canvas id="canvas"></canvas>
+        <canvas id="canvas2"></canvas>
+      </div>
+      <div class="column control-box box"></div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bulma-slider@2.0.0/dist/js/bulma-slider.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/stackblur-canvas@1.4.1/dist/stackblur.min.js"></script>
+  <script src="filter_photo.js"></script>
+  <script src="edit_photo.js"></script>
+</body>
+
+</html>
