@@ -1,5 +1,5 @@
 const DISPLAY_IMAGE_WIDTH = 640;
-const IMAGE_SOURCE = "images/cat_sample.jpg";
+const IMAGE_SOURCE = "images/Dale.jpg";
 // "https://tblg.k-img.com/restaurant/images/Rvw/56676/640x640_rect_56676551.jpg";
 
 const canvas = document.getElementById("canvas");
