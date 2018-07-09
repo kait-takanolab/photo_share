@@ -1,84 +1,70 @@
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Veiw photo</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 
-        <link rel="stylesheet" type="text/css" href="slider_pro_master/dist/css/slider-pro.min.css" media="screen"/>
-        <link rel="stylesheet" type="text/css" href="slider_pro_master/libs/fancybox/jquery.fancybox.css" media="screen"/>
-        <script type="text/javascript" src="slider_pro_master/libs/jquery-1.11.0.min.js"></script>
-        <script type="text/javascript" src="slider_pro_master/dist/js/jquery.sliderPro.min.js"></script>
-        <script type="text/javascript" src="slider_pro_master/libs/fancybox/jquery.fancybox.pack.js"></script>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Veiw photo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 
-        <script type="text/javascript" src="js/view_photo.js"></script>
+    <link rel="stylesheet" type="text/css" href="slider_pro_master/dist/css/slider-pro.min.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="slider_pro_master/libs/fancybox/jquery.fancybox.css" media="screen" />
+    <script type="text/javascript" src="slider_pro_master/libs/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="slider_pro_master/dist/js/jquery.sliderPro.min.js"></script>
+    <script type="text/javascript" src="slider_pro_master/libs/fancybox/jquery.fancybox.pack.js"></script>
 
-        <style>
-            .sepia {
-                filter: sepia(100%);
-                -webkit-filter: sepia(1);
-                -ms-filter: sepia(100%);
-                }
-        </style>
+    <script type="text/javascript" src="js/view_photo.js"></script>
 
+    <style>
+        .sepia {
+            filter: sepia(100%);
+            -webkit-filter: sepia(1);
+            -ms-filter: sepia(100%);
+        }
+    </style>
+</head>
 
-        <script type="text/javascript">
-            //スライドショーの機能
-            function slide_show(){
-                $( '#photo_slide' ).sliderPro({
-                    width: 960,
-                    height: 500,
-                    fade: true,
-                    arrows: true,
-                    buttons: false,
-                    fullScreen: false,
-                    shuffle: true,
-                    smallSize: 500,
-                    mediumSize: 1000,
-                    largeSize: 3000,
-                    thumbnailArrows: false,
-                    autoplay: false
-                });
-                // instantiate fancybox when a link is clicked
-                $( '#photo_slide .sp-image' ).parent( 'a' ).on( 'click', function( event ) {
-                    event.preventDefault();
-                    if ( $( '#photo_slide' ).hasClass( 'sp-swiping' ) === false ) {
-                        $.fancybox.open( $( '#photo_slide .sp-image' ).parent( 'a' ), { index: $( this ).parents( '.sp-slide' ).index() } );
-                    }
-                });
-            };
-        </script>
-
-    </head>
-    <body>
-        <section class="hero is-primary is-bold">
-                <div class="hero-body">
-                    <div class="container">
-                    <h1 class="title">
-                        photo sharing
-                    </h1>
-                    </div>
+<body>
+    <section class="hero is-primary is-bold">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    photo sharing
+                </h1>
+            </div>
+        </div>
+        <div class="hero-foot">
+            <nav class="tabs is-boxed is-fullwidth">
+                <div class="container">
+                    <ul>
+                        <li>
+                            <a href="home.html">home</a>
+                        </li>
+                        <li>
+                            <a href="take_photoupload.html">Take photo</a>
+                        </li>
+                        <li class="is-active">
+                            <a href="view_photo.html">View your photo</a>
+                        </li>
+                        <li>
+                            <a href="edit_photo.html">Edit photo</a>
+                        </li>
+                        <li>
+                            <a>Setting</a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="hero-foot">
-                    <nav class="tabs is-boxed is-fullwidth">
-                        <div class="container">
-                            <ul>
-                            <li ><a href="home.html">home</a></li>
-                            <li><a href="take_photoupload.html">Take photo</a></li>
-                            <li class="is-active"><a href="view_photo.html">View your photo</a></li>
-                            <li><a href="edit_photo.html">Edit photo</a></li>
-                            <li><a>Setting</a></li>
-                            </ul>
-                        </div>
-                    </nav>
-                </div>
-        </section>
+            </nav>
+        </div>
+    </section>
 
-        <div class="notification">
-            <div id="photo_slide" class="slider-pro">
-                <div class="sp-slides" id="main-window">
-                    <!--
+    <div class="notification">
+        <div class="columns">
+            <div class="column">
+      
+        <div id="photo_slide" class="slider-pro">
+            <div class="sp-slides" id="main-window">
+                <!--
                     <div class="sp-slide">
                         <a href="images/image1.jpg">
                             <img class="sp-image" src="images/image1.jpg"/>
@@ -90,30 +76,76 @@
                         </a>
                     </div>
                     -->
-                    <div class="sp-slide">
-                        <a href="images/cat_sample.jpg">
-                            <img class="sp-image sepia" src="images/cat_sample.jpg"/>
-                        </a>
-                    </div>
-                    <div class="sp-slide">
-                            <a href="images/cat_sample.jpg">
-                                <img class="sp-image" src="images/cat_sample.jpg"/>
-                            </a>
-                    </div>
-
+                <div class="sp-slide">
+                    <a href="images/cat_sample.jpg">
+                        <img class="sp-image sepia" src="images/cat_sample.jpg" />
+                    </a>
+                </div>
+                <div class="sp-slide">
+                    <a href="images/cat_sample.jpg">
+                        <img class="sp-image" src="images/cat_sample.jpg" />
+                    </a>
                 </div>
 
-                <div class="sp-thumbnails" id="sub-window">
-                    <!--
+            </div>
+
+            <div class="sp-thumbnails" id="sub-window">
+                <!--
                     <img class="sp-thumbnail" src="images/image1.jpg"/>
                     <img class="sp-thumbnail" src="images/image2.jpg"/>
                     -->
-                    <img class="sp-thumbnail sepia" src="images/cat_sample.jpg"/>
-                    <img class="sp-thumbnail " src="images/cat_sample.jpg"/>
-
-                </div>
+                <img class="sp-thumbnail sepia" src="images/cat_sample.jpg" />
+                <img class="sp-thumbnail " src="images/cat_sample.jpg" />
             </div>
         </div>
-        <div id="test"></div>
-    </body>
+    </div>
+</div>
+        <div class="columns">
+                <div class="column is-4 is-offset-8">
+                    <button class="button is-primary is-large" id="send_photo_name">Go to edit</button>
+                </div>
+            </div>
+  
+    </div>
+    <div id="test"></div>
+
+    <script type="text/javascript">
+        //スライドショーの機能
+        function slide_show() {
+            $('#photo_slide').sliderPro({
+                width: 960,
+                height: 500,
+                fade: true,
+                arrows: true,
+                buttons: false,
+                fullScreen: false,
+                shuffle: true,
+                smallSize: 500,
+                mediumSize: 1000,
+                largeSize: 3000,
+                thumbnailArrows: false,
+                autoplay: false
+            });
+            // instantiate fancybox when a link is clicked
+            $('#photo_slide .sp-image').parent('a').on('click', function (event) {
+                event.preventDefault();
+                if ($('#photo_slide').hasClass('sp-swiping') === false) {
+                    $.fancybox.open($('#photo_slide .sp-image').parent('a'), { index: $(this).parents('.sp-slide').index() });
+                }
+            });
+        };
+
+        $('#send_photo_name').click(function (e) {
+            console.log("hoge")
+            let parent_dom = $('#photo_slide .sp-selected .sp-image').parent('a');
+            let href = parent_dom.attr('href');
+            console.log(href)
+
+            window.location.href = "./edit_photo.html?photo_name=" + href;
+        });
+
+
+    </script>
+</body>
+
 </html>

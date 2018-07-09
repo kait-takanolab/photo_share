@@ -1,6 +1,11 @@
 const DISPLAY_IMAGE_WIDTH = 640;
-const IMAGE_SOURCE = "images/Dale.jpg";
 // "https://tblg.k-img.com/restaurant/images/Rvw/56676/640x640_rect_56676551.jpg";
+
+//クエリで渡される画像名を取得
+let query=location.search;
+query=query.split('?');
+query=query[1].split('=');
+const IMAGE_SOURCE = query[1];
 
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
