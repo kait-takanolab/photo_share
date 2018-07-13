@@ -1,7 +1,7 @@
 <?php
 
 function getsqlitedb(){
- $sqlitedb = new PDO('sqlite:../db/photo_share.sqlite3');
+ $sqlitedb = new PDO('sqlite:../db/photo_share_db.sqlite3');
     mb_language("uni");
     mb_internal_encoding("utf-8");
     mb_http_input("auto");
