@@ -9,6 +9,8 @@ $photo = $_FILES['photo'];
 $photodata=$photo['tmp_name'];
 $photoname=$photo['name'];
 
+rename($photodata,"../images/$photoname");
+
 //ジャイロデータ
 $gyro['alpha'] = $_POST['gyro_a'];
 $gyro['beta'] = $_POST['gyro_b'];
@@ -36,10 +38,10 @@ $stmt->execute();
 $gyro_id = $pdo->lastinsertid(); 
 
 //photo_nameテーブルに保存した写真の名前を保存するステートメント
-$stmt=$pdo->prepare("INSERT INTO photo_data(name,gyro_id,angle_id,position_id,take_photo_time) VALUES(:photoname,:gyro,:angle,:position,:time)");
+$stmt=$pdo->prepare("INSERT INTO photo_data(photo_name,gyro_id,angle_id,position_id,take_photo_time) VALUES(:photoname,:gyro,:angle,:position,:time)");
 $stmt->bindvalue(":photoname", $photoname);
 $stmt->bindvalue(":gyro",$gyro_id );
-$stmt->bindvalue(":angle", $photoname);
+$stmt->bindvalue(":angle",$position);
 $stmt->bindvalue(":position", $position);
 $stmt->bindvalue(":time", $t_time);
 //ステートメントの実行

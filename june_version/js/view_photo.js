@@ -17,7 +17,7 @@ $.ajax({
   success: function(json){
     console.log(json);
     for(let i in json){
-      var name = json[i]['name'];
+      var name = json[i]['photo_name'];
       if (name != null) {
         $('#main-window').prepend("<div class='sp-slide'><a href='images/"+name+"'><img class='sp-image' src='images/"+name+"'/></a></div>");
         $('#sub-window').prepend('<img class="sp-thumbnail" src="images/'+name+'"/>'); 
