@@ -48,7 +48,7 @@ $stmt->execute();
 $gyro_id = $pdo->lastinsertid();
 
 //photo_nameテーブルに保存した写真の名前を保存するステートメント
-$stmt = $pdo->prepare("INSERT INTO photo_data(photo_name,gyro_id,angle,position,take_pho_duration) VALUES(:photoname,:gyro,:angle,:position,:time)");
+$stmt = $pdo->prepare("INSERT INTO photo_data(photo_name,gyro_id,angle,position,take_photo_duration) VALUES(:photoname,:gyro,:angle,:position,:time)");
 $stmt->bindvalue(":photoname", $photoname);
 $stmt->bindvalue(":gyro", $gyro_id);
 $stmt->bindvalue(":angle", $angle);
