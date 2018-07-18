@@ -10,7 +10,7 @@ let photoname;
 //data : サーバに送信する値
 $.ajax({
   type: "POST",
-  url: "php/return_photo.php",//写真名を取得するphp
+  url: "php/fetch_photo_info.php",//写真名を取得するphp
   data: data,
   dataType: "json",
   //Ajax通信が成功した場合に呼び出されるメソッド
