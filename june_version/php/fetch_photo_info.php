@@ -9,7 +9,7 @@ $phto_info = file_get_contents("php://input");
 $db=getsqlitedb();
 
 //photo_nameテーブルに保存した写真の名前を保存するステートメント
-$stmt=$db->prepare("SELECT photo_name FROM photo_data");
+$stmt=$db->prepare("SELECT name FROM photo");
 //ステートメントの実行
 $stmt->execute();
 
