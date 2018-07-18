@@ -8,8 +8,12 @@ header("Content-type: text/json; charset=UTF-8");
 $photo = $_FILES['photo'];
 $photodata = $photo['tmp_name'];
 $photoname = $photo['name'];
-
-rename($photodata, "../images/$photoname");
+$photopath = __DIR__ . "/../images/$photoname";
+rename($photodata, $photopath);
+$imagesize=getimagesize($photopath);
+$photo_width=$imagesize[0];
+$photo_height=$imagesize[1];
+$photo_size=$photo_width . "," . $photo_height;
 
 //ジャイロデータ
 $gyro['alpha'] = $_POST['gyro_a'];
@@ -24,12 +28,11 @@ $result = $gyro;
 $angle = '';
 if ($gyro['beta'] < 60) {
     $angle = 'low';
-} else if ($gyro['beta'] >= 60 && $gyro['beta'] < 120) {
+} elseif ($gyro['beta'] >= 60 && $gyro['beta'] < 120) {
     $angle = 'middle';
-} else if ($gyro['beta'] >= 120) {
+} elseif ($gyro['beta'] >= 120) {
     $angle = 'high';
-}
-else{
+} else {
     $angle = null;
 }
 
@@ -38,22 +41,16 @@ else{
 //db接続したPDOを格納
 $pdo = getsqlitedb();
 
-$stmt = $pdo->prepare("INSERT INTO gyro_data(gyro_alpha,gyro_beta,gyro_gamma) VALUES(:alpha,:beta,:gamma)");
-$stmt->bindvalue(":alpha", $gyro['alpha']);
-$stmt->bindvalue(":beta", $gyro['beta']);
-$stmt->bindvalue(":gamma", $gyro['gamma']);
-
-//ステートメントの実行
-$stmt->execute();
-$gyro_id = $pdo->lastinsertid();
-
-//photo_nameテーブルに保存した写真の名前を保存するステートメント
-$stmt = $pdo->prepare("INSERT INTO photo_data(photo_name,gyro_id,angle,position,take_photo_duration) VALUES(:photoname,:gyro,:angle,:position,:time)");
+//photoテーブルに保存した写真の名前を保存するステートメント
+$stmt = $pdo->prepare("INSERT INTO photo(name,camera_angle,camera_position,take_duration,gyro_alpha,gyro_beta,gyro_gamma,size,user_id) VALUES(:photoname,:angle,:position,:take_duration,:gyro_alpha,:gyro_beta,:gyro_gamma,:photo_size,1)");
 $stmt->bindvalue(":photoname", $photoname);
-$stmt->bindvalue(":gyro", $gyro_id);
 $stmt->bindvalue(":angle", $angle);
 $stmt->bindvalue(":position", $position);
-$stmt->bindvalue(":time", $t_time);
+$stmt->bindvalue(":take_duration", $t_time);
+$stmt->bindvalue(":gyro_alpha", $gyro["alpha"]);
+$stmt->bindvalue(":gyro_beta", $gyro["beta"]);
+$stmt->bindvalue(":gyro_gamma", $gyro["gamma"]);
+$stmt->bindvalue(":photo_size", $photo_size);
 //ステートメントの実行
 $stmt->execute();
 
@@ -63,5 +60,4 @@ if ($photoname != null) {
     $result = "error!";
 }
 
-print json_encode($result)
-?>
+print json_encode($result);
