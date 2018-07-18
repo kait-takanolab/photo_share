@@ -8,8 +8,8 @@ $phto_info = file_get_contents("php://input");
 //db接続したPDOを格納
 $db=getsqlitedb();
 
-//photo_nameテーブルに保存した写真の名前を保存するステートメント
-$stmt=$db->prepare("SELECT name FROM photo");
+//photoテーブルとeditテーブルに保存した写真の名前一覧を保存するステートメント
+$stmt=$db->prepare("SELECT name FROM photo UNION SELECT name FROM edit");
 //ステートメントの実行
 $stmt->execute();
 
