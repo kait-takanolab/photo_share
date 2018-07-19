@@ -36,6 +36,15 @@ filters.forEach(filter => {
   });
 });
 
+// Photo name input field
+const photoNameField = $("<div class='field'>").appendTo(".control-box");
+photoNameField
+  .append("<label class='label'>Photo name</label>")
+  .append("<div class='control'>");
+const photoNameInputField = $(
+  "<input id='photoname' class='input' type='text' placeholder='Photo name'>"
+).appendTo(photoNameField);
+
 // Display filters reset button and save button
 const buttonField = $("<div class='field is-grouped'>").appendTo(
   ".control-box"
@@ -60,12 +69,29 @@ resetButton[0].addEventListener("click", () => {
 
 // save button
 const saveButtonControl = $("<div class='control'>").appendTo(buttonField);
-const saveButton = $("<a class='button is-link'>Save</a>").appendTo(
+const saveButton = $("<a class='button is-link' disabled>Save</a>").appendTo(
   saveButtonControl
 );
+
+// Disable button if there is not text in input field
+photoNameInputField[0].addEventListener("input", () => {
+  const inputText = photoNameInputField.val();
+  if (inputText.length > 0) {
+    saveButton.attr("disabled", false);
+    console.log(saveButton.attr("disabled"));
+  } else {
+    saveButton.attr("disabled", true);
+    console.log(saveButton.attr("disabled"));
+  }
+});
 saveButton[0].addEventListener("click", () => {
-  saveButton.attr({
-    href: canvas.toDataURL("image/png"),
-    download: "canvas-image"
-  });
+  const inputText = photoNameInputField.val();
+  if (inputText.length > 0) {
+    saveButton.attr({
+      href: canvas.toDataURL("image/png"),
+      download: "canvas-image"
+    });
+  } else {
+    return false;
+  }
 });
