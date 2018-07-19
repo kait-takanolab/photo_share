@@ -42,7 +42,7 @@ filters.forEach(filter => {
 // reset button
 const resetButtonControl = $("<div class='control'>").appendTo(".control-box");
 const resetButton = $(
-  "<button class='button is-outlined reset-button'>Reset</button>"
+  "<button class='button is-outlined reset-button'>Filter Reset</button>"
 ).appendTo(resetButtonControl);
 resetButton[0].addEventListener("click", () => {
   // reset slider position
