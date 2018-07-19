@@ -12,4 +12,7 @@ PRAGMA foreign_keys = OFF;BEGIN TRANSACTION;CREATE TABLE IF NOT EXISTS `filter_p
 );
 INSERT INTO
   filter_preset
-VALUES(1, 'sepia', 0, 0, 0, 100, 0, 0, 100, 100);COMMIT;
+VALUES(1, 'sepia', 0, 0, 0, 100, 0, 0, 100, 100);
+INSERT INTO
+  filter_preset
+VALUES(2, 'invert', 0, 0, 0, 0, 100, 0, 100, 100);COMMIT;
