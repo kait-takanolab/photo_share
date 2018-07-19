@@ -65,9 +65,7 @@
               gamma = event.gamma;
             };
             function get_starttime() {
-              var nowtime = new Date();
-              first_timestanp = nowtime.getSeconds();
-              console.log(first_timestanp);
+              const first_timestanp = new Date(); // ms
             }
             //値が変化した時に実行されるイベント
             var input_file = document.getElementById("img");
@@ -75,16 +73,14 @@
               // ファイルが選択されたか
               if (input_file.value) {
                 console.log("ファイルが選択された:" + input_file.value);
-                var nowtime2 = new Date();
-                finish_timestanp = nowtime2.getSeconds();
-                console.log(finish_timestanp);
+                const finish_timestanp = new Date(); // ms
                 //document.getElementById("output1").innerHTML= input_file.value;
                 var reader = new FileReader();
                 reader.onload = function (e) {
                   $("#preview").attr('src', e.target.result);
                 }
                 reader.readAsDataURL(e.target.files[0]);
-                document.getElementById("taketime").innerHTML = "Take photo time: " + (finish_timestanp - first_timestanp);
+                document.getElementById("taketime").innerHTML = "Take photo time: " + (Math.round((finish_timestanp - first_timestanp) / 1000)); // sec
                 document.getElementById("gyro").innerHTML = "Gyro Direction:" + alpha + "<br>Gyro Vertical slope:" + beta + "<br>Gyro Left and right inclination:" + gamma;
               } else {
                 console.log("ファイルが未選択");

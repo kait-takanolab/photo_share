@@ -1,6 +1,5 @@
 // measure edited elapsed time
-const now = new Date();
-const start_time = now.getSeconds();
+const start_time = new Date(); // ms
 
 // Display filter sliders
 filters.forEach(filter => {
@@ -94,9 +93,8 @@ photoNameInputField[0].addEventListener("input", () => {
 // send meta parameters of the photo when save button click
 saveButton[0].addEventListener("click", () => {
   // send edited elapsed time
-  const now = new Date();
-  const finished_time = now.getSeconds();
-  const elapsed_time = finished_time - start_time;
+  const end_time = new Date(); // ms
+  const elapsed_time = Math.round((end_time - start_time) / 1000); // sec
   $(
     `<input type='hidden' name='elapsed_time' value='${elapsed_time}'>`
   ).appendTo(form);
