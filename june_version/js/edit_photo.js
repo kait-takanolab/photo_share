@@ -104,21 +104,23 @@ saveButton[0].addEventListener("click", () => {
   $(
     `<input type='hidden' name='canvas_image' value='${canvasImage}'>`
   ).appendTo(form);
+
+  // send filter parameters
+  const filterParameters = JSON.stringify(getFilterParameters());
+  $(
+    `<input type='hidden' name='filter_parameters' value='${filterParameters}'>`
+  ).appendTo(form);
+
+  // send whether edited or
+  $(`<input type='hidden' name='is_edited' value='${is_edited}'>`).appendTo(
+    form
+  );
+
+  // send original photo name
+  $(
+    `<input type='hidden' name='original_photoname' value='${originalPhotoName}'>`
+  ).appendTo(form);
 });
-
-// send filter parameters
-const filterParameters = JSON.stringify(getFilterParameters());
-$(
-  `<input type='hidden' name='filter_parameters' value='${filterParameters}'>`
-).appendTo(form);
-
-// send whether edited or
-$(`<input type='hidden' name='is_edited' value='${is_edited}'>`).appendTo(form);
-
-// send original photo name
-$(
-  `<input type='hidden' name='original_photoname' value='${originalPhotoName}'>`
-).appendTo(form);
 
 // filter preset buttons
 const filterPresetButtonBox = $("#filter-preset-button-box");
