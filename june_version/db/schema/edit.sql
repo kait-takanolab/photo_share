@@ -11,7 +11,8 @@ PRAGMA foreign_keys = OFF;BEGIN TRANSACTION;CREATE TABLE IF NOT EXISTS `edit` (
   `hue_rotate_filter` INTEGER,
   `lightness_filter` INTEGER,
   `saturation_filter` INTEGER,
-  `photo_id` INTEGER NOT NULL
+  `photo_id` INTEGER,
+  `edit_id` INTEGER
 );
 INSERT INTO
   edit
@@ -28,5 +29,6 @@ VALUES(
     0,
     100,
     100,
-    1
+    1,
+    NULL
   );COMMIT;
