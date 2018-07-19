@@ -1,68 +1,72 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>home page</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script type="text/javascript" >
-        //画面が狭いときにメニューが折りたたみできるようにしているよ
-        $(function(){
-            $(".navbar-burger").click(function(){
-                if($(this).attr("class")=="navbar-burger burger"){
-                $(this).removeClass("navbar-burger burger").addClass("navbar-burger burger is-active");
-                $(".navbar-menu").removeClass("navbar-menu").addClass("navbar-menu is-active");
-                }
-                else{
-                $(this).removeClass("navbar-burger burger is-active").addClass("navbar-burger burger");
-                $(".navbar-menu").removeClass("navbar-menu is-active").addClass("navbar-menu");
-                }
-                });
-        });
-    </script>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>home page</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <script type="text/javascript">
+    //画面が狭いときにメニューが折りたたみできるようにしているよ
+    $(function () {
+      $(".navbar-burger").click(function () {
+        if ($(this).attr("class") == "navbar-burger burger") {
+          $(this).removeClass("navbar-burger burger").addClass("navbar-burger burger is-active");
+          $(".navbar-menu").removeClass("navbar-menu").addClass("navbar-menu is-active");
+        }
+        else {
+          $(this).removeClass("navbar-burger burger is-active").addClass("navbar-burger burger");
+          $(".navbar-menu").removeClass("navbar-menu is-active").addClass("navbar-menu");
+        }
+      });
+    });
+  </script>
 
 </head>
-<body>
-    <section class="hero is-primary is-fullheight is-bold">
-        <div class="hero-head">
-            <nav class="navbar is-transparent">
-                <div class="navbar-brand">
-                    <div class="navbar-burger burger" data-target="navbarMenuHeroC">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    </div>
-                </div>
-                <div id="navbarMenuHeroC" class="navbar-menu" >
-                    <div class="navbar-end">
-                        <a class="navbar-item is-active">
-                            Home
-                        </a>
-                        <a class="navbar-item" href="take_photoupload.html">
-                            Take photo
-                        </a>
-                        <a class="navbar-item" href="view_photo.html">
-                            View
-                        </a>
-                        <a class="navbar-item" href="edit_photo.html">
-                            Edit
-                        </a>
-                    </div>
-                </div>
-            </nav>
-        </div>
-        <div class="hero-body">
-            <div class="container">
-            <h1 class="title">
-                photo sharing
-            </h1>
-            </div>
-        </div>
 
-    </section>
+<body>
+  <section class="hero is-primary is-fullheight is-bold">
+    <div class="hero-head">
+      <nav class="navbar is-transparent">
+        <div class="navbar-brand">
+          <div class="navbar-burger burger" data-target="navbarMenuHeroC">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+        <div id="navbarMenuHeroC" class="navbar-menu">
+          <div class="navbar-end">
+            <a class="navbar-item is-active">
+              Home
+            </a>
+            <a class="navbar-item" href="take_photoupload.html">
+              Take photo
+            </a>
+            <a class="navbar-item" href="view_photo.html">
+              View
+            </a>
+            <a class="navbar-item" href="edit_photo.html">
+              Edit
+            </a>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+          photo sharing
+        </h1>
+      </div>
+    </div>
+
+  </section>
 
 </body>
+
 </html>
