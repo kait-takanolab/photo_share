@@ -4,7 +4,8 @@ const DISPLAY_IMAGE_WIDTH = 640;
 //クエリで渡される画像名を取得
 const query_parameter = location.search.split("?")[1];
 const queries = query_parameter.split("&");
-const IMAGE_SOURCE = queries[0].split("=")[1];
+const originalPhotoName = queries[0].split("=")[1].split("/")[1];
+const IMAGE_SOURCE = "images/" + originalPhotoName;
 const is_edited = queries[1].split("=")[1] === "true";
 
 const canvas = document.getElementById("canvas");
@@ -295,7 +296,7 @@ const filters = [
     }
   },
   {
-    name: "hue-rotate",
+    name: "hue_rotate",
     initValue: 0,
     minValue: 0,
     maxValue: 360,

@@ -1,1 +1,4 @@
 *.sqlite3
+images/*
+!images/cat_sample.jpg
+!images/grayscale_cat.png

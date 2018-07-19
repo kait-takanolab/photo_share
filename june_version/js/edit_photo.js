@@ -119,3 +119,8 @@ $(
 
 // send whether edited or
 $(`<input type='hidden' name='is_edited' value='${is_edited}'>`).appendTo(form);
+
+// send original photo name
+$(
+  `<input type='hidden' name='original_photoname' value='${originalPhotoName}'>`
+).appendTo(form);

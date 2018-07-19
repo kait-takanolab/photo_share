@@ -4,7 +4,7 @@ PRAGMA foreign_keys = OFF;BEGIN TRANSACTION;CREATE TABLE IF NOT EXISTS `edit` (
   `crop_size` TEXT,
   `edit_duration` INTEGER,
   `gaussian_filter` INTEGER,
-  `contrast _filter` INTEGER,
+  `contrast_filter` INTEGER,
   `grayscale_filter` INTEGER,
   `sepia_filter` INTEGER,
   `invert_filter` INTEGER,
