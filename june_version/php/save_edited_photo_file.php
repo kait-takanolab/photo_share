@@ -63,5 +63,7 @@ $stmt->execute();
 // 前のページに強制的に戻す
 // ホントはsubmitしても画面遷移させたくないんだけど
 // 上手く行かないので強制的に前のページにリダイレクトする
-$uri = $_SERVER['HTTP_REFERER'];
-header("Location: " . $uri, true, 303);
+$reffer_url = parse_url($_SERVER["HTTP_REFERER"]);
+$redirect_url = $reffer_url["scheme"] . "://" . $reffer_url["host"] . $reffer_url["path"];
+$redirect_url = $redirect_url . "?photo_name=images/".$photoname."&is_edited=true";
+header("Location: " . $redirect_url, true, 303);
