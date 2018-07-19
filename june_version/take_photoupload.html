@@ -66,7 +66,7 @@
             };
             function get_starttime() {
               var nowtime = new Date();
-              first_timestanp = nowtime.getTime();
+              first_timestanp = nowtime.getSeconds();
               console.log(first_timestanp);
             }
             //値が変化した時に実行されるイベント
@@ -76,7 +76,7 @@
               if (input_file.value) {
                 console.log("ファイルが選択された:" + input_file.value);
                 var nowtime2 = new Date();
-                finish_timestanp = nowtime2.getTime();
+                finish_timestanp = nowtime2.getSeconds();
                 console.log(finish_timestanp);
                 //document.getElementById("output1").innerHTML= input_file.value;
                 var reader = new FileReader();

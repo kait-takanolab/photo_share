@@ -16,17 +16,14 @@ $.ajax({
   //Ajax通信が成功した場合に呼び出されるメソッド
   success: function(json) {
     for (let i in json) {
-      var name = json[i]["name"];
+      const name = json[i]["name"];
+      const is_edited = json[i]["is_edited"].toString();
       if (name != null) {
         $("#main-window").prepend(
-          "<div class='sp-slide'><a href='images/" +
-            name +
-            "'><img class='sp-image' src='images/" +
-            name +
-            "'/></a></div>"
+          `<div class='sp-slide'><a href='images/${name}' data-is-edited='${is_edited}'><img class='sp-image' src='images/${name}' data-is-edited='${is_edited}'/></a></div>`
         );
         $("#sub-window").prepend(
-          '<img class="sp-thumbnail" src="images/' + name + '"/>'
+          `<img class="sp-thumbnail" src="images/${name}" data-is-edited='${is_edited}'/>`
         );
       }
     }

@@ -63,18 +63,7 @@
     <div class="columns">
       <div class="column">
         <div id="photo_slide" class="slider-pro">
-          <div class="sp-slides" id="main-window">
-            <div class="sp-slide">
-              <a href="images/cat_sample.jpg">
-                <img class="sp-image sepia" src="images/cat_sample.jpg" />
-              </a>
-            </div>
-            <div class="sp-slide">
-              <a href="images/cat_sample.jpg">
-                <img class="sp-image" src="images/cat_sample.jpg" />
-              </a>
-            </div>
-          </div>
+          <div class="sp-slides" id="main-window"></div>
           <div class="sp-thumbnails" id="sub-window"></div>
         </div>
       </div>
@@ -113,12 +102,10 @@
     };
 
     $('#send_photo_name').click(function (e) {
-      console.log("hoge")
       let parent_dom = $('#photo_slide .sp-selected .sp-image').parent('a');
       let href = parent_dom.attr('href');
-      console.log(href)
-
-      window.location.href = "./edit_photo.html?photo_name=" + href;
+      const is_edited = parent_dom.data("is-edited")
+      window.location.href = `./edit_photo.html?photo_name=${href}&is_edited=${is_edited}`
     });
   </script>
 </body>

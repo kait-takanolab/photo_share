@@ -1,3 +1,7 @@
+// measure edited elapsed time
+const now = new Date();
+const start_time = now.getSeconds();
+
 // Display filter sliders
 filters.forEach(filter => {
   let field = $("<div class='field'>").appendTo(".control-box");
@@ -36,18 +40,25 @@ filters.forEach(filter => {
   });
 });
 
+// form group
+const form = $(
+  "<form method='POST' action='php/save_edited_photo_file.php' enctype='multipart/form-data'>"
+).appendTo(".control-box");
+
 // Photo name input field
-const photoNameField = $("<div class='field'>").appendTo(".control-box");
+const photoNameField = $("<div class='field'>").appendTo(form);
+// const photoNameField = $("<div class='field'>").appendTo(".control-box");
 photoNameField
   .append("<label class='label'>Photo name</label>")
   .append("<div class='control'>");
 const photoNameInputField = $(
-  "<input id='photoname' class='input' type='text' placeholder='Photo name'>"
+  "<input name='photoname' class='input' type='text' placeholder='Photo name'>"
 ).appendTo(photoNameField);
 
 // Display filters reset button and save button
 const buttonField = $("<div class='field is-grouped'>").appendTo(
-  ".control-box"
+  // ".control-box"
+  form
 );
 
 // reset button
@@ -69,29 +80,42 @@ resetButton[0].addEventListener("click", () => {
 
 // save button
 const saveButtonControl = $("<div class='control'>").appendTo(buttonField);
-const saveButton = $("<a class='button is-link' disabled>Save</a>").appendTo(
-  saveButtonControl
-);
+// const saveButton = $("<a class='button is-link' disabled>Save</a>").appendTo(
+const saveButton = $(
+  "<input type='submit' class='button is-link' disabled>"
+).appendTo(saveButtonControl);
+saveButton.val("Save");
 
 // Disable button if there is not text in input field
 photoNameInputField[0].addEventListener("input", () => {
   const inputText = photoNameInputField.val();
   if (inputText.length > 0) {
     saveButton.attr("disabled", false);
-    console.log(saveButton.attr("disabled"));
   } else {
     saveButton.attr("disabled", true);
-    console.log(saveButton.attr("disabled"));
   }
 });
 saveButton[0].addEventListener("click", () => {
-  const inputText = photoNameInputField.val();
-  if (inputText.length > 0) {
-    saveButton.attr({
-      href: canvas.toDataURL("image/png"),
-      download: "canvas-image"
-    });
-  } else {
-    return false;
-  }
+  // send edited elapsed time
+  const now = new Date();
+  const finished_time = now.getSeconds();
+  const elapsed_time = finished_time - start_time;
+  $(
+    `<input type='hidden' name='elapsed_time' value='${elapsed_time}'>`
+  ).appendTo(form);
+
+  // send canvas image
+  const canvasImage = canvas.toDataURL("image/png").replace(/^.+?,/, "");
+  $(
+    `<input type='hidden' name='canvas_image' value='${canvasImage}'>`
+  ).appendTo(form);
 });
+
+// send filter parameters
+const filterParameters = JSON.stringify(getFilterParameters());
+$(
+  `<input type='hidden' name='filter_parameters' value='${filterParameters}'>`
+).appendTo(form);
+
+// send whether edited or
+$(`<input type='hidden' name='is_edited' value='${is_edited}'>`).appendTo(form);

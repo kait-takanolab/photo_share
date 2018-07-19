@@ -2,10 +2,10 @@ const DISPLAY_IMAGE_WIDTH = 640;
 // "https://tblg.k-img.com/restaurant/images/Rvw/56676/640x640_rect_56676551.jpg";
 
 //クエリで渡される画像名を取得
-let query=location.search;
-query=query.split('?');
-query=query[1].split('=');
-const IMAGE_SOURCE = query[1];
+const query_parameter = location.search.split("?")[1];
+const queries = query_parameter.split("&");
+const IMAGE_SOURCE = queries[0].split("=")[1];
+const is_edited = queries[1].split("=")[1] === "true";
 
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
@@ -386,3 +386,11 @@ const filters = [
     }
   }
 ];
+
+function getFilterParameters() {
+  let ret = {};
+  filters.forEach(filter => {
+    ret[filter.name] = filter.currentValue;
+  });
+  return ret;
+}
