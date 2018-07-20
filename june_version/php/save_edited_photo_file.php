@@ -26,7 +26,7 @@ $photo_size=$photo_width . "," . $photo_height;
 //db接続したPDOを格納
 $pdo = getsqlitedb();
 
-//photoテーブルに保存した写真の名前を保存するステートメント
+//editテーブルに編集した写真の名前を保存するステートメント
 $stmt = $pdo->prepare("INSERT INTO
 edit(name,crop_size,edit_duration,gaussian_filter,contrast_filter,grayscale_filter,sepia_filter,invert_filter,hue_rotate_filter,lightness_filter,saturation_filter,photo_id,edit_id)
 VALUES(:name,:crop_size,:edit_duration,:gaussian_filter,:contrast_filter,:grayscale_filter,:sepia_filter,:invert_filter,:hue_rotate_filter,:lightness_filter,:saturation_filter,:photo_id,:edit_id)");
