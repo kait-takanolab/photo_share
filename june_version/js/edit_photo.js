@@ -1,9 +1,12 @@
 // measure edited elapsed time
 const start_time = new Date(); // ms
 
+// parameters control box
+const controlBox = $(".control-box");
+
 // Display filter sliders
 filters.forEach(filter => {
-  let field = $("<div class='field'>").appendTo(".control-box");
+  let field = $("<div class='field'>").appendTo(controlBox);
   const label = filter.name.charAt(0).toUpperCase() + filter.name.slice(1);
   $("<label class='label'>" + label + "</label>").appendTo(field);
   const control = $("<div class='control'>").appendTo(field);
@@ -40,9 +43,12 @@ filters.forEach(filter => {
 });
 
 // reset button
-const resetButtonControl = $("<div class='control'>").appendTo(".control-box");
+const resetButtonField = $("<div class='field'>").appendTo(controlBox);
+const resetButtonControl = $("<div class='control'>").appendTo(
+  resetButtonField
+);
 const resetButton = $(
-  "<button class='button is-outlined reset-button'>Filter Reset</button>"
+  "<button class='button is-outlined'>Reset</button>"
 ).appendTo(resetButtonControl);
 resetButton[0].addEventListener("click", () => {
   // reset slider position
@@ -56,10 +62,57 @@ resetButton[0].addEventListener("click", () => {
   ctx.putImageData(originalImageData, 0, 0);
 });
 
+// field to input filter preset name
+const presetNameFormField = $("<div class='field'>").appendTo(controlBox);
+const presetNameFormControl = $("<div class='control'>").appendTo(
+  presetNameFormField
+);
+presetNameFormControl.append("<label class='label'>Preset name</label>");
+const presetNameFormInput = $(
+  "<input name='filter_preset_name' class='input' type='text' placeholder='Filter Preset name'>"
+).appendTo(presetNameFormControl);
+
+// button to save filter preset
+const savePresetNameButtonField = $("<div class='field'>").appendTo(controlBox);
+const savePresetNameButtonControl = $("<div class='control'>").appendTo(
+  savePresetNameButtonField
+);
+const saveFilterPresetButton = $(
+  "<button class='button is-warning reset-button' disabled>Save</button>"
+).appendTo(savePresetNameButtonControl);
+saveFilterPresetButton[0].addEventListener("click", () => {
+  // send filter values to server
+  (async () => {
+    const filterParameters = getFilterParameters();
+    const presetName = presetNameFormInput.val();
+    const res = await fetch("/php/register_filter_preset.php", {
+      method: "POST",
+      body: JSON.stringify({
+        name: presetName,
+        filter_parameters: filterParameters
+      }),
+      headers: {
+        "content-type": "application/json"
+      }
+    });
+    const filterPresets = await res.json();
+    displayFilterPresetButtons(filterPresets);
+  })();
+});
+// disable button if there is not text in input field
+presetNameFormInput[0].addEventListener("input", () => {
+  const inputText = presetNameFormInput.val();
+  if (inputText.length > 0) {
+    saveFilterPresetButton.attr("disabled", false);
+  } else {
+    saveFilterPresetButton.attr("disabled", true);
+  }
+});
+
 // form group
 const form = $(
   "<form method='POST' action='php/save_edited_photo_file.php' enctype='multipart/form-data'>"
-).appendTo(".control-box");
+).appendTo(controlBox);
 
 // Photo name input field
 const photoNameField = $("<div class='field'>").appendTo(form);
@@ -123,11 +176,20 @@ saveButton[0].addEventListener("click", () => {
 });
 
 // filter preset buttons
-const filterPresetButtonBox = $("#filter-preset-button-box");
 (async () => {
   // get filter presets
   const res = await fetch("/php/fetch_filter_preset.php");
   const filterPresets = await res.json();
+  displayFilterPresetButtons(filterPresets);
+})();
+
+function displayFilterPresetButtons(filterPresets) {
+  const filterPresetButtonBox = $("#filter-preset-button-box");
+
+  // init
+  filterPresetButtonBox.empty();
+
+  // display buttons
   filterPresets.forEach(filter => {
     // create preset buttons
     const presetButton = $(
@@ -149,4 +211,4 @@ const filterPresetButtonBox = $("#filter-preset-button-box");
       });
     });
   });
-})();
+}
