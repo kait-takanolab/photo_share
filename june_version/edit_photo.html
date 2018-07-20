@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Document</title>
+  <title>Edit photo</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-slider@2.0.0/dist/css/bulma-slider.min.css">
   <link rel="stylesheet" href="css/edit_photo.css">
@@ -35,7 +35,7 @@
               <a href="edit_photo.html">Edit photo</a>
             </li>
             <li>
-              <a>hogehoge</a>
+              <a>Settings</a>
             </li>
           </ul>
         </div>
@@ -46,8 +46,17 @@
   <div class="container">
     <div class="columns">
       <div class="column is-7">
-        <canvas id="canvas"></canvas>
-        <canvas id="canvas2"></canvas>
+        <div class="columns">
+          <div class="column">
+            <canvas id="canvas"></canvas>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column">
+            <h1 class="title">Filter Presets</h1>
+            <div id="filter-preset-button-box"></div>
+          </div>
+        </div>
       </div>
       <div class="column control-box box"></div>
     </div>

@@ -1,158 +1,167 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>home page</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.2.1/exif.min.js"></script>
-    </head>
-    <body>
-        <section class="hero is-primary is-bold">
-                <div class="hero-body">
-                    <div class="container">
-                    <h1 class="title">
-                        photo sharing
-                    </h1>
-                    </div>
-                </div>
-                <div class="hero-foot">
-                    <nav class="tabs is-boxed is-fullwidth">
-                        <div class="container">
-                            <ul>
-                            <li><a href="index.html">home</a></li>
-                            <li class="is-active"><a href="take_photoupload.html">Take photo</a></li>
-                            <li><a href="view_photo.html">View your photo</a></li>
-                            <li><a href="edit_photo.html">Edit photo</a></li>
-                            <li><a>Settings</a></li>
-                            </ul>
-                        </div>
-                    </nav>
-                </div>
-        </section>
 
-        <div class="field notification">
-            <form id="picture" enctype="multipart/form-data">
-            <div class="file is-primary">
-                <label class="file-label">
-                <input class="file-input" type="file" name="photo" id="img" onclick="get_starttime()">
-                    <script type="text/javascript">
-                        var alpha = 0;
-                        var beta = 0;
-                        var gamma = 0;
-                        var first_timestanp;
-                        var finish_timestanp;
-                        window.addEventListener("deviceorientation", handleOrientation, true);
-                        function handleOrientation(event) {
-                            alpha = event.alpha;
-                            beta  = event.beta;
-                            gamma = event.gamma;
-                        };
-                        function get_starttime() {
-                            var nowtime=new Date();
-                            first_timestanp=nowtime.getTime();
-                            console.log(first_timestanp);
-                        }
-                        //値が変化した時に実行されるイベント
-                        var input_file = document.getElementById("img");
-                        input_file.onchange = function (e){
-                            // ファイルが選択されたか
-                            if(input_file.value){
-                                console.log("ファイルが選択された:" + input_file.value);
-                                var nowtime2=new Date();
-                                finish_timestanp=nowtime2.getTime();
-                                console.log(finish_timestanp);
-                                //document.getElementById("output1").innerHTML= input_file.value;
-                                var reader = new FileReader();
-                                reader.onload = function (e) {
-                                    $("#preview").attr('src', e.target.result);
-                                }
-                                reader.readAsDataURL(e.target.files[0]);
-                                document.getElementById("taketime").innerHTML="Take photo time: " + (finish_timestanp - first_timestanp);
-                                document.getElementById("gyro").innerHTML = "Gyro Direction:"+alpha+"<br>Gyro Vertical slope:"+beta+"<br>Gyro Left and right inclination:"+gamma;
-                            }else{
-                                console.log("ファイルが未選択");
-                            }
-                        };
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>home page</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.2.1/exif.min.js"></script>
+</head>
 
-                        function send_photo(){
-                            var camera = document.getElementsByName("answer");
-                            // 選択状態の値を取得
-                            for ( var position="", i=camera.length; i--; ) {
-                                if ( camera[i].checked ) {
-                                    var position = camera[i].value ;
-                                    break ;
-                                }
-                            }
-                            if(position === ""){
-                                alert("Please select camera position");
-                                return;
-                            }
-                            else if(input_file.value === ""){
-                                alert("Please select picture");
-                                return;
-                            }
-                            var formData = $("#picture").get()[0];
-                            var photo = new FormData( formData );
-                            photo.append("gyro_a", alpha);
-                            photo.append("gyro_b", beta);
-                            photo.append("gyro_c", gamma);
-                            photo.append("taketime", finish_timestanp - first_timestanp);
-                            photo.append("position", position);
-                            for(item of photo) console.log(item);
-                            $.ajax({
-                                url: 'php/tsts.php',
-                                type: 'post',
-                                dataType: 'text',
-                                data: photo,
-                                processData: false,
-                                contentType: false
-                            }).done(function(result){
-                            });
-                        }
-                    </script>
-                <span class="file-cta">
-                    <span class="file-icon">
-                    <i class="fa fa-upload"></i>
-                    </span>
-                    <span class="file-label">
-                    Select photo
-                    </span>
-                </span>
-                </label>
-            </div>
-            </form>
-
-            <div class="columns">
-                <div class="column">
-                    <img id="preview">
-                    <div class="has-text-black" id="taketime"></div>
-                    <div class="has-text-black" id="gyro"></div>
-                </div>
-                <div class="column">
-                    <div>Please select Camera position</div>
-
-                    <div class="control">
-                        <label class="radio">
-                            <input type="radio" name="answer" value="high">High
-                        </label>
-                        <label class="radio">
-                            <input type="radio" name="answer" value="middle">Middle
-                        </label>
-                        <label class="radio">
-                            <input type="radio" name="answer" value="low">Low
-                        </label>
-                    </div>
-                    <button type="button" class="button is-primary" onclick="send_photo()" >Submit</button>
-
-                </div>
-            </div>
+<body>
+  <section class="hero is-primary is-bold">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+          photo sharing
+        </h1>
+      </div>
+    </div>
+    <div class="hero-foot">
+      <nav class="tabs is-boxed is-fullwidth">
+        <div class="container">
+          <ul>
+            <li>
+              <a href="index.html">home</a>
+            </li>
+            <li class="is-active">
+              <a href="take_photoupload.html">Take photo</a>
+            </li>
+            <li>
+              <a href="view_photo.html">View your photo</a>
+            </li>
+            <li>
+              <a href="edit_photo.html">Edit photo</a>
+            </li>
+            <li>
+              <a>Settings</a>
+            </li>
+          </ul>
         </div>
+      </nav>
+    </div>
+  </section>
+
+  <div class="field notification">
+    <form id="picture" enctype="multipart/form-data">
+      <div class="file is-primary">
+        <label class="file-label">
+          <input class="file-input" type="file" name="photo" id="img" onclick="get_starttime()">
+          <script type="text/javascript">
+            var alpha = 0;
+            var beta = 0;
+            var gamma = 0;
+            var first_timestanp;
+            var finish_timestanp;
+            window.addEventListener("deviceorientation", handleOrientation, true);
+            function handleOrientation(event) {
+              alpha = event.alpha;
+              beta = event.beta;
+              gamma = event.gamma;
+            };
+            function get_starttime() {
+              first_timestanp = new Date(); // ms
+            }
+            //値が変化した時に実行されるイベント
+            var input_file = document.getElementById("img");
+            input_file.onchange = function (e) {
+              // ファイルが選択されたか
+              if (input_file.value) {
+                console.log("ファイルが選択された:" + input_file.value);
+                finish_timestanp = new Date(); // ms
+                //document.getElementById("output1").innerHTML= input_file.value;
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                  $("#preview").attr('src', e.target.result);
+                }
+                reader.readAsDataURL(e.target.files[0]);
+                document.getElementById("taketime").innerHTML = "Take photo time: " + (Math.round((finish_timestanp - first_timestanp) / 1000)); // sec
+                document.getElementById("gyro").innerHTML = "Gyro Direction:" + alpha + "<br>Gyro Vertical slope:" + beta + "<br>Gyro Left and right inclination:" + gamma;
+              } else {
+                console.log("ファイルが未選択");
+              }
+            };
+
+            function send_photo() {
+              var camera = document.getElementsByName("answer");
+              // 選択状態の値を取得
+              for (var position = "", i = camera.length; i--;) {
+                if (camera[i].checked) {
+                  var position = camera[i].value;
+                  break;
+                }
+              }
+              if (position === "") {
+                alert("Please select camera position");
+                return;
+              }
+              else if (input_file.value === "") {
+                alert("Please select picture");
+                return;
+              }
+              var formData = $("#picture").get()[0];
+              var photo = new FormData(formData);
+              photo.append("gyro_a", alpha);
+              photo.append("gyro_b", beta);
+              photo.append("gyro_c", gamma);
+              photo.append("taketime", (Math.round((finish_timestanp - first_timestanp) / 1000)).toString()); // sec
+              photo.append("position", position);
+              for (item of photo) console.log(item);
+              $.ajax({
+                url: 'php/register_photo_info.php',
+                type: 'post',
+                dataType: 'text',
+                data: photo,
+                processData: false,
+                contentType: false
+              }).done(function (result) {
+              });
+            }
+          </script>
+          <span class="file-cta">
+            <span class="file-icon">
+              <i class="fa fa-upload"></i>
+            </span>
+            <span class="file-label">
+              Select photo
+            </span>
+          </span>
+        </label>
+      </div>
+    </form>
+
+    <div class="columns">
+      <div class="column">
+        <img id="preview">
+        <div class="has-text-black" id="taketime"></div>
+        <div class="has-text-black" id="gyro"></div>
+      </div>
+      <div class="column">
+        <div>Please select Camera position</div>
+
+        <div class="control">
+          <label class="radio">
+            <input type="radio" name="answer" value="high">High
+          </label>
+          <label class="radio">
+            <input type="radio" name="answer" value="middle">Middle
+          </label>
+          <label class="radio">
+            <input type="radio" name="answer" value="low">Low
+          </label>
+        </div>
+        <button type="button" class="button is-primary" onclick="send_photo()">Submit</button>
+
+      </div>
+    </div>
+  </div>
 
 
-    </body>
+</body>
+
 </html>
