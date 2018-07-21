@@ -85,7 +85,7 @@ saveFilterPresetButton[0].addEventListener("click", () => {
   (async () => {
     const filterParameters = getFilterParameters();
     const presetName = presetNameFormInput.val();
-    const res = await fetch("/php/register_filter_preset.php", {
+    const res = await fetch("php/register_filter_preset.php", {
       method: "POST",
       body: JSON.stringify({
         name: presetName,
@@ -178,7 +178,7 @@ saveButton[0].addEventListener("click", () => {
 // filter preset buttons
 (async () => {
   // get filter presets
-  const res = await fetch("/php/fetch_filter_preset.php");
+  const res = await fetch("php/fetch_filter_preset.php");
   const filterPresets = await res.json();
   displayFilterPresetButtons(filterPresets);
 })();
