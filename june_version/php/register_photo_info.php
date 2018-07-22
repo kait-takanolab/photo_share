@@ -7,7 +7,7 @@ header("Content-type: text/json; charset=UTF-8");
 //写真データ
 $photo = $_FILES['photo'];
 $photodata = $photo['tmp_name'];
-$photoname = $photo['name'];
+$photoname = uniqid(rand(), true) . ".png"; 
 $photopath = __DIR__ . "/../images/$photoname";
 rename($photodata, $photopath);
 $imagesize=getimagesize($photopath);
