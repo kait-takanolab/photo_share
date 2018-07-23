@@ -96,12 +96,17 @@
                   break;
                 }
               }
+              var user_id = $("#user_id").val();
               if (position === "") {
                 alert("Please select camera position");
                 return;
               }
               else if (input_file.value === "") {
                 alert("Please select picture");
+                return;
+              }
+              else if (user_id === "") {
+                alert("Please select user_id");
                 return;
               }
               var formData = $("#picture").get()[0];
@@ -111,6 +116,7 @@
               photo.append("gyro_c", gamma);
               photo.append("taketime", (Math.round((finish_timestanp - first_timestanp) / 1000)).toString()); // sec
               photo.append("position", position);
+              photo.append("user_id", user_id);
               for (item of photo) console.log(item);
               $.ajax({
                 url: 'php/register_photo_info.php',
@@ -157,6 +163,9 @@
             <input type="radio" name="answer" value="low">Low
           </label>
         </div>
+
+        <div>Please select User id</div>
+        <input type="number" id="user_id">
         <button type="button" class="button is-primary" onclick="send_photo()">Submit</button>
 
       </div>
