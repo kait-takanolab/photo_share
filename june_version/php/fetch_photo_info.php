@@ -14,6 +14,11 @@ $stmt=$db->prepare("SELECT name FROM photo");
 $stmt->execute();
 $photo_names = $stmt->fetchAll(PDO::FETCH_ASSOC);
 foreach ($photo_names as $i => &$v) {
+    // リサイズ済みのファイルがあるならそれをオリジナルファイルの代わりに配信する
+    $resized_photo_name = preg_replace("/^(.+)\.([^\.]+)$/", "$1__small.$2", $v["name"]);
+    if (file_exists(__DIR__ . "/../images/" . $resized_photo_name)) {
+        $v["name"] = $resized_photo_name;
+    }
     $v["is_edited"] = false;
 }
 
@@ -23,6 +28,11 @@ $stmt=$db->prepare("SELECT name FROM edit");
 $stmt->execute();
 $edit_names = $stmt->fetchAll(PDO::FETCH_ASSOC);
 foreach ($edit_names as $i => &$v) {
+    // リサイズ済みのファイルがあるならそれをオリジナルファイルの代わりに配信する
+    $resized_photo_name = preg_replace("/^(.+)\.([^\.]+)$/", "$1__small.$2", $v["name"]);
+    if (file_exists(__DIR__ . "/../images/" . $resized_photo_name)) {
+        $v["name"] = $resized_photo_name;
+    }
     $v["is_edited"] = true;
 }
 

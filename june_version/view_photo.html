@@ -103,7 +103,7 @@
 
     $('#send_photo_name').click(function (e) {
       let parent_dom = $('#photo_slide .sp-selected .sp-image').parent('a');
-      let href = parent_dom.attr('href');
+      let href = parent_dom.attr('href').replace("__small", "");
       const is_edited = parent_dom.data("is-edited")
       window.location.href = `./edit_photo.html?photo_name=${href}&is_edited=${is_edited}`
     });
