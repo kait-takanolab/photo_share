@@ -4,12 +4,31 @@
 require_once 'get_db.php';
 header("Content-type: text/json; charset=UTF-8");
 
+// コマンドが存在するか
+function checkShellCommand($command)
+{
+    $returnValue = shell_exec("$command");
+    if (empty($returnValue)) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
 //写真データ
 $photo = $_FILES['photo'];
 $photodata = $photo['tmp_name'];
-$photoname = uniqid(rand(), true) . ".png"; 
-$photopath = __DIR__ . "/../images/$photoname";
-rename($photodata, $photopath);
+$photoname = uniqid(rand(), true) . ".png";
+$photodir = __DIR__ . "/../images/";
+$photopath = $photodir . $photoname;
+rename($photodata, $photopath); // 写真データをファイルに保存
+
+if (checkShellCommand("convert")) {
+    // アップロードされた写真をリサイズする
+    $resized_photoname = str_replace(".png", "__small.png", $photoname);
+    exec("convert '$photodir$photoname' -resize '640x>' '$photodir$resized_photoname'");
+}
+
 $imagesize=getimagesize($photopath);
 $photo_width=$imagesize[0];
 $photo_height=$imagesize[1];
